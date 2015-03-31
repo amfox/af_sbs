@@ -47,6 +47,5 @@ class Application(tornado.web.Application):
         self.scheduler.add_listener(self.listener, EVENT_JOB_ADDED | EVENT_JOB_EXECUTED | EVENT_JOB_ERROR)
 
     def listener(self, event):
-
         print "jobid:", event.job_id, "jobstore", event.jobstore, "eventcode:", event.code
 
