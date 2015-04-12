@@ -1,3 +1,4 @@
+# coding=utf-8
 from progressbar import ProgressBar, FileTransferSpeed, Bar, Percentage, ETA, Counter, Timer
 import time
 
@@ -18,7 +19,7 @@ def example2():
 def example(filenum):
     widgets = ['Back Processed: ', Counter(), ' files (', Timer(), ')']
     pbar = ProgressBar(widgets=widgets)
-    for i in pbar((i for i in range(int(filenum)+1))):
+    for i in pbar((i for i in range(int(filenum) + 1))):
         time.sleep(0.1)
 
 
