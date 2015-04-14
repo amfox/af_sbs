@@ -1,20 +1,21 @@
 # coding=utf-8
 import time
-from apscheduler.triggers import date
-from datetime import datetime
+import json
 from progressbar import ProgressBar, Counter, Timer
-from tornado.web import RequestHandler
+from handler.BaseHandler import BaseHandler
 
 __author__ = 'tif'
 
-def testlocalbackup(a, b):
-        test1 = a
-        test2 = b
 
-        for i in range(101):
-            time.sleep(0.2)
-            barlen = i / 2
-            print '\r|' + '#' * barlen + '-' * (50 - barlen) + '|', str(i) + '%',
+def testlocalbackup(a, b):
+    test1 = a
+    test2 = b
+
+    for i in range(101):
+        time.sleep(0.2)
+        barlen = i / 2
+        print '\r|' + '#' * barlen + '-' * (50 - barlen) + '|', str(i) + '%',
+
 
 def localbackup(filenum, name):
     widgets = ['Back Processed: ', Counter(), ' files (', Timer(), ')']
@@ -25,11 +26,36 @@ def localbackup(filenum, name):
         time.sleep(0.1)
 
 
-class AddJobHandler(RequestHandler):
-    def getsched(self):
-        return self.application.scheduler
+class AddJobHandler(BaseHandler):
+    def post(self):
 
-    def get(self):
+        """
+        @:param jobname 任务标识名
+        @:param typeflag 任务标识位 0表示即时任务,1表示定时任务
+        @:param syncflag 同步标志位 0表示不同步,1表示同步
+
+        @:param foldlist
+        @:param filelist
+
+        @:param f1 typeflag=1时有效 表示分钟 (0-59)               example:[1,2,3]
+        @:param f2 typeflag=1时有效 表示小时 (0-23)               example:[1,2,3]
+        @:param f3 typeflag=1时有效 表示一个周的天 (1-7)           example:[1,3,5]
+
+        """
+        # jobname = self.get_body_argument('jobname')
+        # typeflag = self.get_body_argument('typeflag')
+        # syncflag = self.get_body_argument("syncflag")
+        #
+        # foldlist = self.get_body_arguments("foldlist")
+        # filelist = self.get_body_arguments("filelist")
+        #
+        # f1 = self.get_body_argument("f1")
+        # f2 = self.get_body_argument("f2")
+        # f3 = self.get_body_arguments("f3")
+        print self.from_body_get_arguments()
+
+        # print typeflag, syncflag, foldlist, filelist, f1, f2, f3
+
         # args
         # jobtype = self.get_argument('jobtype')
         # runtime = self.get_argument('runtime')
@@ -37,10 +63,10 @@ class AddJobHandler(RequestHandler):
         # fileargs = self.get_arguments('files')
         # rundate = datetime.now()
 
-        sched = self.getsched()
+        # sched = self.getsched()
 
         # sched.add_job(self.test, 'date',kwargs={'a': ['text', 'vvv', 'ccc'], 'b': 'aa'}, jobstore='recoverstore')
-        job = sched.add_job(testlocalbackup, 'date', args=[1,  4], name='localback')
+        # job = sched.add_job(testlocalbackup, 'date', args=[1, 4], name='localback')
         # job = self.application.scheduler.add_job(localbackup, 'interval', seconds=1, next_run_time=None,
         # args=('111', 'null'), misfire_grace_time=1, coalesce=True)
 
