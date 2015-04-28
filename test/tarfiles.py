@@ -55,7 +55,7 @@ def make_tar(folder_to_backup, dest_folder, compression='bz2'):
     else:
         dest_cmp = ''
     out = tarfile.TarFile.open(dest_path, 'w' + dest_cmp)
-    out.add(folder_to_backup, arcname)
+    out.add(folder_to_backup)
     import pdb;
 
     pdb.set_trace()
@@ -65,8 +65,7 @@ def make_tar(folder_to_backup, dest_folder, compression='bz2'):
 
 
 if __name__ == "__main__":
-    reload(sys)
-    sys.setdefaultencoding("utf-8")
+
     writer = csv.writer(file('aaaa.csv', 'wb'))
 
     for path in all_files('F:\\temp'):

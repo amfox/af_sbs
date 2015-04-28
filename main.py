@@ -14,6 +14,7 @@ if __name__ == "__main__":
     reload(sys)
     sys.setdefaultencoding("utf-8")
 
+    # Tips how to break the service
     print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
     # Execution will block here until Ctrl+C (Ctrl+Break on Windows) is pressed.
